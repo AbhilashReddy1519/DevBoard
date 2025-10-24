@@ -1,0 +1,48 @@
+{
+  "name": "devboard",
+  "version": "1.0.0",
+  "description": "DevBoard is a full-stack productivity platform built to help developers organize their goals, track habits, and visualize progress — all in one place.",
+  "keywords": [
+    "DevBoard",
+    "Tasks",
+    "habits",
+    "todos",
+    "analytics"
+  ],
+  "homepage": "https://github.com/AbhilashReddy1519/DevBoard#readme",
+  "bugs": {
+    "url": "https://github.com/AbhilashReddy1519/DevBoard/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbhilashReddy1519/DevBoard.git"
+  },
+  "license": "MIT",
+  "author": "Abhilash Reddy",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.51.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@eslint/json": "^0.13.2",
+    "@types/node": "^24.9.1",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.1",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2"
+  }
+}

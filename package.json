@@ -1,0 +1,28 @@
+{
+    "name": "devboard",
+    "version": "1.0.0",
+    "description": "DevBoard is a full-stack productivity platform built to help developers organize their goals, track habits, and visualize progress — all in one place.",
+    "keywords": [
+        "DevBoard",
+        "Tasks",
+        "habits",
+        "todos",
+        "analytics"
+    ],
+    "homepage": "https://github.com/AbhilashReddy1519/DevBoard#readme",
+    "bugs": {
+        "url": "https://github.com/AbhilashReddy1519/DevBoard/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AbhilashReddy1519/DevBoard.git"
+    },
+    "license": "MIT",
+    "author": "Abhilash Reddy",
+    "devDependencies": {
+        "husky": "^9.1.7"
+    },
+    "scripts": {
+        "prepare": "husky"
+    }
+}
