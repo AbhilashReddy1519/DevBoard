@@ -48,3 +48,5 @@ const habitSchema = new Schema(
 );
 
 const Habit = model("Habit", habitSchema);
+
+module.exports = Habit;

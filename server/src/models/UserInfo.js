@@ -30,5 +30,6 @@ const userInfoSchema = new Schema({
 	leetcode: String,
 });
 
-
 const UserInfo = model("UserInfo", userInfoSchema);
+
+module.exports = UserInfo;
