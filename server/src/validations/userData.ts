@@ -1,13 +1,13 @@
-const { z } = require("zod");
+import { z } from "zod";
 
 const userSignUpSchema = z.object({
 	name: z.object({
 		firstName: z
-			.string({ required_error: "First name is required" })
+			.string({ message: "First name is required" })
 			.trim()
 			.min(1, "First name cannot be empty"),
 		lastName: z
-			.string({ required_error: "Last name is required" })
+			.string({ message: "Last name is required" })
 			.trim()
 			.min(1, "Last name cannot be empty"),
 		middleName: z.string().trim().optional(),
@@ -15,13 +15,13 @@ const userSignUpSchema = z.object({
 		isPreferedName: z.boolean().default(false).optional(),
 	}),
 	email: z
-		.string({ required_error: "Email is required" })
+		.string({ message: "Email is required" })
 		.email("Invalid email address"),
 	username: z
-		.string({ required_error: "Username is required" })
+		.string({ message: "Username is required" })
 		.min(3, "Username must be at least 3 characters"),
 	password: z
-		.string({ required_error: "Password is required" })
+		.string({ message: "Password is required" })
 		.min(8, "Password must be at least 8 characters")
 		.max(16, "Password must be less than 16 characters")
 		.regex(

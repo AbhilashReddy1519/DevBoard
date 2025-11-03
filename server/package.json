@@ -22,8 +22,9 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
+    "start": "node dist/app.js",
     "dev": "nodemon src/app.js"
   },
   "dependencies": {
@@ -34,6 +35,16 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "@eslint/js": "^9.39.0",
+    "@eslint/json": "^0.13.2",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.5.0",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2"
   }
 }

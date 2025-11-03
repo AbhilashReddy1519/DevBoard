@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		/* **Project and Output Configuration** */
+		"target": "ES2020" /* Specify ECMAScript target version (e.g., 'ES2020'). Node.js supports modern versions. */,
+		"module": "CommonJS" /* Specify module code generation (Node.js traditionally uses CommonJS). */,
+		"moduleResolution": "node" /* Resolve modules using Node.js style resolution. */,
+		"rootDir": "./src" /* Specify the root directory of source files. */,
+		"outDir": "./dist" /* Specify the output directory for compiled JS files. */,
+		"esModuleInterop": true /* Enables compatibility with CommonJS modules that have default exports. Highly recommended. */,
+		"forceConsistentCasingInFileNames": true /* Ensure correct case is used in file names and imports. */,
+
+		/* **Type Checking & Strictness** */
+		"strict": true /* Enable all strict type-checking options (recommended for high quality code). */,
+		"skipLibCheck": true /* Skip type checking of declaration files (faster compilation). */,
+		"noImplicitAny": true /* Ensures you don't use 'any' without explicitly saying so (included in "strict": true, but good to know). */,
+		"strictNullChecks": true /* Catches errors for null/undefined variables (included in "strict": true). */,
+
+		/* **Source Maps (Debugging)** */
+		"sourceMap": true /* Generates corresponding .map files for debugging in the original TS code. */,
+
+		/* **Additional Libraries** */
+		"lib": [
+			"ES2020"
+		] /* Specify a list of library files to be included in the compilation (e.g., promises, array methods). */
+	},
+	"include": [
+		"src/**/*" /* Only compile files inside the 'src' directory. */
+	],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts" /* Exclude test files from the main build. */,
+		"dist" /* Exclude the output directory from being processed. */
+	]
+}
