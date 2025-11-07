@@ -1,6 +1,6 @@
 // External Modules
 import express, { Express } from "express";
-import dotenv from "dotenv"; // Use the standard dotenv import for type safety
+import dotenv from "@dotenvx/dotenvx"; // Use the standard dotenv import for type safety
 // NOTE: If using @dotenvx/dotenvx, its documentation will guide the correct TS import/initialization.
 // Assuming standard environment setup for simplicity:
 dotenv.config();
@@ -8,7 +8,7 @@ dotenv.config();
 // Local Modules
 // Import statements for modules that export functions or variables:
 import "./config/connectDB";
-import userRouter from "./routes/userRoutes"; // Assuming userRouter is exported as default
+import userRouter from "./routes/userRoutes";
 
 const app: Express = express(); // Explicitly type the app object
 

@@ -1,7 +1,29 @@
-// External Modules
-const { model, Schema } = require("mongoose");
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-const userSchema = new Schema(
+// 1. Define the TypeScript Interface for the Document
+// This describes the structure of a single User document retrieved from MongoDB.
+export interface IUserName {
+	firstName: string;
+	middleName?: string;
+	lastName: string;
+	preferedName?: string;
+	isPreferedName?: boolean;
+}
+
+export interface IUser extends Document {
+	name: IUserName;
+	email: string;
+	username: string;
+	password: string; // Stored as a hash
+	role?: "user" | "admin";
+	isVerifed?: boolean;
+	// Mongoose adds these properties because of { timestamps: true }
+	createdAt: Date;
+	updatedAt: Date;
+}
+
+// 2. Define the Mongoose Schema
+const userSchema: Schema<IUser> = new Schema(
 	{
 		name: {
 			isPreferedName: {
@@ -60,6 +82,8 @@ const userSchema = new Schema(
 	},
 );
 
-const User = model("User", userSchema);
+// 3. Create the Model and Export (using ESM syntax to prevent redeclaration error)
+// The Model<IUser> type provides strong typing for all static and instance methods.
+const User: Model<IUser> = mongoose.model<IUser>("User", userSchema);
 
-module.exports = User;
+export default User;
