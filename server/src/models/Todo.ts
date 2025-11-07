@@ -1,6 +1,33 @@
-const { model, Schema, Types } = require("mongoose");
+import { model, Schema, Types, Document, Model } from "mongoose";
 
-const TodoStruct = new Schema(
+// --- 1. To-Do Sub-Document Interface (ITodoStruct) ---
+
+// Defines the structure of a single to-do item within the array
+export interface ITodoStruct extends Document {
+	todo: string;
+	isComplete: boolean;
+	createdAt: Date; // Note: Although you set default: Date.now, the outer timestamps will handle the main document.
+
+	// Mongoose Sub-document Timestamps (if enabled by timestamps: true in the sub-schema options)
+	updatedAt: Date;
+}
+
+// --- 2. Main Document Interface (ITodo) ---
+
+// Defines the structure of the document stored in the 'todos' collection
+export interface ITodo extends Document {
+	userId: Types.ObjectId;
+	// An array of the sub-document type
+	todo: Types.DocumentArray<ITodoStruct>;
+
+	// Global Document Timestamps
+	createdAt: Date;
+	updatedAt: Date;
+}
+
+// --- 3. To-Do Sub-Schema Definition (todoStructSchema) ---
+
+const todoStructSchema: Schema<ITodoStruct> = new Schema(
 	{
 		todo: {
 			type: String,
@@ -11,30 +38,44 @@ const TodoStruct = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		// The createdAt field here is redundant if 'timestamps: true' is used below,
+		// but kept to match your original structure.
 		createdAt: {
 			type: Date,
 			default: Date.now,
 		},
 	},
 	{
-		timestamps: true,
+		_id: true, // Ensure sub-documents get an _id
+		timestamps: true, // Adds createdAt and updatedAt to the sub-document
 	},
 );
 
-const Todo = new Schema(
+// --- 4. Main To-Do Schema Definition (todoSchema) ---
+
+const todoSchema: Schema<ITodo> = new Schema(
 	{
 		userId: {
-			type: Types.ObjectId,
+			// FIX: Use Schema.Types.ObjectId to correctly reference the Mongoose type
+			type: Schema.Types.ObjectId,
 			ref: "User",
 			required: true,
 		},
-		todo: [TodoStruct],
+		// Define the array using the sub-schema
+		todo: {
+			type: [todoStructSchema],
+			default: [], // Good practice to default array fields to empty
+		},
 	},
 	{
-		timestamps: true,
+		timestamps: true, // Adds createdAt and updatedAt to the main document
 	},
 );
 
-const ToDo = model("Todo", Todo);
+// --- 5. Model Export ---
 
-module.exports = Todo;
+// Note: Renamed the variable from 'Todo' (Schema) to 'TodoModel' or simply 'ToDo'
+const ToDoModel: Model<ITodo> = model<ITodo>("Todo", todoSchema);
+
+// Use ESM export instead of CommonJS 'module.exports'
+export default ToDoModel;

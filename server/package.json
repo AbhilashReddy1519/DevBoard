@@ -20,12 +20,12 @@
   "license": "MIT",
   "author": "Abhilash Reddy",
   "type": "commonjs",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.ts"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.51.0",
