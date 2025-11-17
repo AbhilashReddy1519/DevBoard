@@ -31,8 +31,9 @@ export const userSignUpSchema = z.object({
 });
 
 // Optional but highly recommended: Export the inferred TypeScript type
-export type UserSignUpSchema = z.infer<typeof userSignUpSchema>;
+export type TUserSignUpSchema = z.infer<typeof userSignUpSchema>;
 
+// export default userSignUpSchema;
 // import { z } from "zod";
 
 // const userSignUpSchema = z.object({

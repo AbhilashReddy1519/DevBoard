@@ -1,23 +1,20 @@
-// usercontroller.ts
 import { Request, Response } from "express";
 import User, { IUser } from "../models/User";
-import {
-	userSignUpSchema,
-	UserSignUpSchema as SignUpData,
-} from "../validations/userData";
-import bcrypt from "bcryptjs";
+import { userSignUpSchema, TUserSignUpSchema as SignUpData } from "../validations/userSignUp";
+import z from "zod";
+import { encryptPassword, verifyPassword } from "../models/bycrypt";
+// import { ca } from "zod/v4/locales";
+import { TUserLoginSchema, userLoginSchema } from "../validations/userLogin";
+// import User from "../models/User";
 
-export const signUp = async (
-	req: Request,
-	res: Response,
-): Promise<Response> => {
+export const signUp = async (req: Request, res: Response): Promise<Response> => {
 	// 1. Validate the request body using Zod
 	const validationResult = userSignUpSchema.safeParse(req.body);
 
 	if (!validationResult.success) {
 		return res.status(400).json({
 			message: "Invalid input data",
-			errors: validationResult.error.flatten().fieldErrors,
+			errors: z.treeifyError(validationResult.error)
 		});
 	}
 
@@ -38,8 +35,7 @@ export const signUp = async (
 		}
 
 		// 3. 🛡️ Security Fix: Hash the password
-		const salt: string = await bcrypt.genSalt(10);
-		const hashedPassword = await bcrypt.hash(password, salt);
+		const hashedPassword = await encryptPassword(password);
 
 		// 4. Create a new user object with the HASHED password
 		const newUser: IUser = new User({
@@ -66,3 +62,53 @@ export const signUp = async (
 			.json({ message: "Server error during user creation." });
 	}
 };
+
+export const login = async (req: Request, res:Response) : Promise<Response> => {
+	// validate request using req body
+	const validationResult = userLoginSchema.safeParse(req.body);
+
+	if(!validationResult.success) {
+		res.status(400).json({
+			message: "Invalid input data",
+			error: z.treeifyError(validationResult.error),
+		})
+	}
+
+	// validated data
+	const {userIdentifier , password}= validationResult.data as TUserLoginSchema ;
+	try {
+		// check if user with email or username exists
+
+		const user: IUser | null = await User.findOne({
+			$or:[
+				{email : userIdentifier},
+				{username: userIdentifier}
+			],
+		});
+		if(!user){
+			return res.status(404).json({
+				message: "User is not found",
+				userNotFound: true,
+			});
+		}
+		
+		const userPassword = await verifyPassword(password, user.password);
+		if(!userPassword) {
+			return res.status(401).json({
+				message: "Invalid credentials.",
+			});
+		}
+
+		return res.status(200).json({
+			message: "User found successfully",
+			userId: user._id,
+		});
+	} catch(error) {
+		console.error("Error during sign up:", error);
+
+		// Ensure ALL paths return a Response object
+		return res
+			.status(500)
+			.json({ message: "Server error during user creation." });
+	}
+}
