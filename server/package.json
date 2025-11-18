@@ -1,52 +1,57 @@
 {
-  "name": "devboard",
-  "version": "1.0.0",
-  "description": "DevBoard is a full-stack productivity platform built to help developers organize their goals, track habits, and visualize progress — all in one place.",
-  "keywords": [
-    "DevBoard",
-    "Tasks",
-    "habits",
-    "todos",
-    "analytics"
-  ],
-  "homepage": "https://github.com/AbhilashReddy1519/DevBoard#readme",
-  "bugs": {
-    "url": "https://github.com/AbhilashReddy1519/DevBoard/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AbhilashReddy1519/DevBoard.git"
-  },
-  "license": "MIT",
-  "author": "Abhilash Reddy",
-  "type": "commonjs",
-  "main": "app.ts",
-  "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts"
-  },
-  "dependencies": {
-    "@dotenvx/dotenvx": "^1.51.0",
-    "bcryptjs": "^3.0.3",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.2",
-    "zod": "^4.1.12"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.0",
-    "@eslint/json": "^0.13.2",
-    "@types/express": "^5.0.5",
-    "@types/node": "^24.10.0",
-    "eslint": "^9.39.0",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.5.0",
-    "nodemon": "^3.1.10",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.2"
-  }
+	"name": "devboard",
+	"version": "1.0.0",
+	"description": "DevBoard is a full-stack productivity platform built to help developers organize their goals, track habits, and visualize progress — all in one place.",
+	"keywords": [
+		"DevBoard",
+		"Tasks",
+		"habits",
+		"todos",
+		"analytics"
+	],
+	"homepage": "https://github.com/AbhilashReddy1519/DevBoard#readme",
+	"bugs": {
+		"url": "https://github.com/AbhilashReddy1519/DevBoard/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AbhilashReddy1519/DevBoard.git"
+	},
+	"license": "MIT",
+	"author": "Abhilash Reddy",
+	"type": "module",
+	"main": "app.ts",
+	"scripts": {
+		"dev": "nodemon --watch src --ext ts --exec ts-node src/app.ts",
+		"build": "tsc --project tsconfig.json",
+		"start": "node dist/app.js",
+		"lint": "eslint . --ext .ts",
+		"lint:fix": "eslint . --ext .ts --fix",
+		"test": "jest --passWithNoTests --runInBand",
+		"test:watch": "jest --watch",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"@dotenvx/dotenvx": "^1.51.0",
+		"bcryptjs": "^3.0.3",
+		"dotenv": "^17.2.3",
+		"express": "^5.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.19.2",
+		"zod": "^4.1.12"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.0",
+		"@eslint/json": "^0.13.2",
+		"@types/express": "^5.0.5",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/node": "^24.10.0",
+		"eslint": "^9.39.0",
+		"eslint-plugin-react": "^7.37.5",
+		"globals": "^16.5.0",
+		"nodemon": "^3.1.10",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.46.2"
+	}
 }

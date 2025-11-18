@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import User, { IUser } from "../models/User";
 import { userSignUpSchema, TUserSignUpSchema as SignUpData } from "../validations/userSignUp";
 import z from "zod";
-import { encryptPassword, verifyPassword } from "../models/bycrypt";
+import { encryptPassword, verifyPassword } from "../utils/bycrypt";
 // import { ca } from "zod/v4/locales";
 import { TUserLoginSchema, userLoginSchema } from "../validations/userLogin";
 // import User from "../models/User";

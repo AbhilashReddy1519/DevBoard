@@ -9,3 +9,8 @@ router.post("/signup", signUp);
 
 // Use ESM export
 export default router;
+export type JWTPayloadShape = {
+	userId: string;
+	role?: string;
+	iat?: number;
+};

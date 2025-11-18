@@ -1,20 +1,13 @@
-// 1. Use ESM import syntax for Mongoose
 import { connect } from "mongoose";
 
-// 2. Import dotenvx using standard module import (or a simple require for configuration)
-// Note: In a TypeScript file, ensure you have the appropriate module resolution settings.
-require("@dotenvx/dotenvx").config();
-
-// 3. Define the constants with explicit string types and handle potential undefined
-const MONGO_DB_URI: string = process.env.MONGODB_URL || "";
-const DB_NAME: string = process.env.MONGODB_DB_NAME || "";
+import { MONGODB_URL , MONGODB_DB_NAME } from "./index";
 
 /**
  * Establishes connection to the MongoDB database.
  */
 const connectDB = async (): Promise<void> => {
 	// Basic check to prevent connection with empty URI if .env failed to load
-	if (!MONGO_DB_URI || !DB_NAME) {
+	if (!MONGODB_URL || !MONGODB_DB_NAME) {
 		console.error(
 			"❌ Error: MONGODB_URL or MONGODB_DB_NAME is not defined in environment variables.",
 		);
@@ -22,7 +15,7 @@ const connectDB = async (): Promise<void> => {
 	}
 
 	try {
-		const connectionString = `${MONGO_DB_URI}/${DB_NAME}`;
+		const connectionString = `${MONGODB_URL}/${MONGODB_DB_NAME}`;
 
 		// Mongoose Connect returns a Promise<Mongoose>
 		await connect(connectionString);
