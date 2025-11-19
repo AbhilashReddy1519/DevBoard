@@ -9,8 +9,8 @@ export type JWTPayloadShape = {
 	exp?: number;
 }
 
-export function generateToken(payload: Partial<JWTPayloadShape>, expiresIn: "8h"): string {
-	const token = jwt.sign(payload as object, JWT_SECRET_KEY as string, { expiresIn });
+export function generateToken(payload: Partial<JWTPayloadShape>): string {
+	const token = jwt.sign(payload as object, JWT_SECRET_KEY as string, { expiresIn: "8h" });
 	return token;
 }
 

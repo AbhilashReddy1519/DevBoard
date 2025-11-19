@@ -1,16 +1,15 @@
 // userRoutes.ts
 import express from "express";
-import { signUp } from "../controllers/userController"; // Import the controller function
+import { login, signUp } from "../controllers/userController"; 
+import { validate } from "../middlewares/validate";
+import { userSignUpSchema } from "../validations/userSignUp";
+import { userLoginSchema } from "../validations/userLogin";
 
 const router = express.Router();
 
 // Assign the controller function directly to the route
-router.post("/signup", signUp);
+router.post("/signup",validate(userSignUpSchema), signUp);
+router.post("/login", validate(userLoginSchema), login);
 
 // Use ESM export
 export default router;
-export type JWTPayloadShape = {
-	userId: string;
-	role?: string;
-	iat?: number;
-};

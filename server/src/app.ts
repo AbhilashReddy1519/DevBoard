@@ -1,12 +1,9 @@
 // External Modules
 import express, { Express } from "express";
-import dotenv from "@dotenvx/dotenvx";
-// Assuming standard environment setup for simplicity:
-dotenv.config();
-
 // Local Modules
 import "./config/connectDB";
-import userRouter from "./routes/userRoutes";
+import router from "./routes/index";
+
 
 const app: Express = express(); 
 
@@ -15,7 +12,7 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // --- Local Routes ---
-app.use("/user", userRouter);
+app.use("/api", router);
 
 // --- Server Start ---
 // 1. Get PORT from environment variables.
