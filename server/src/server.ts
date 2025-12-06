@@ -1,16 +1,13 @@
-// import app from "./app";
-// import { connectDB } from "./config/connectDB";
-// import { PORT } from "./config";
-// import { log } from "./utils/logger";
+import app from './app';
+import "./config/connectDB";
 
-// async function start() {
-// 	await connectDB();
-// 	app.listen(PORT, () =>
-// 		log.info(`Server running on http://localhost:${PORT}`),
-// 	);
-// }
+// --- Server Start ---
+// 1. Get PORT from environment variables.
+// 2. Use the 'as string' type assertion or the nullish coalescing operator (??)
+//    to handle 'string | undefined' type from process.env.
+const portString = process.env.PORT || "1000";
+const PORT: number = parseInt(portString, 10);
 
-// start().catch((err) => {
-// 	log.error("Failed to start", err);
-// 	process.exit(1);
-// });
+app.listen(PORT, () => {
+	console.log(`⚡️ Server is running on port ${PORT}...`);
+});
